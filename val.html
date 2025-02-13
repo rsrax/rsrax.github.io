@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Jigglypuff's Valentine Quest!</title>
+	<style>
+		body {
+			background: #ffbad2 url('./bg.gif');
+			font-family: 'Comic Sans MS', cursive;
+			text-align: center;
+			padding: 20px;
+		}
+
+		.container {
+			background: rgba(255, 255, 255, 0.9);
+			border-radius: 20px;
+			padding: 30px;
+			max-width: 600px;
+			margin: 50px auto;
+			box-shadow: 0 0 20px rgba(255, 0, 100, 0.3);
+		}
+
+		h1 {
+			color: #e84393;
+			font-size: 2.5em;
+			margin-bottom: 20px;
+			text-shadow: 2px 2px #ffffff;
+		}
+
+		.movie-quote {
+			font-style: italic;
+			color: #6c5ce7;
+			margin: 15px 0;
+		}
+
+		.button-group {
+			display: flex;
+			justify-content: center;
+			gap: 20px;
+			margin-top: 30px;
+		}
+
+		button {
+			padding: 15px 30px;
+			border: none;
+			border-radius: 50px;
+			font-size: 1.2em;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			font-weight: bold;
+		}
+
+		#yesBtn {
+			background: #55efc4;
+			color: #2d3436;
+		}
+
+		#noBtn {
+			background: #ff7675;
+			color: white;
+			position: relative;
+		}
+
+		#srk-img {
+			width: 150px;
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			animation: float 3s ease-in-out infinite;
+		}
+
+		.hidden {
+			display: none !important;
+		}
+
+		.burp {
+			font-size: 2em;
+			margin: 20px;
+		}
+
+		@keyframes float {
+			0% {
+				transform: translateY(0px);
+			}
+
+			50% {
+				transform: translateY(-20px);
+			}
+
+			100% {
+				transform: translateY(0px);
+			}
+		}
+
+		/* Add more animations and styles as needed */
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Hi Jigglypuff! 💖</h1>
+		<div class="movie-quote">"Well, your crazy matches my crazy, big time. And, uh, we're like two jigsaw
+			pieces, you know, and we have curvy edges. But you fit them together and you see the picture on
+			top." <br>-
+			Deadpool (but also Me)</div>
+
+		<p>After 5 years of being our own version of:</p>
+		<ul>
+			<li>Wade & Vanessa's 🔥</li>
+			<li>Phil & Claire's 🤪</li>
+			<li>Jake & Amy's 🚓</li>
+			<li>Marshall & Lily's 🗽</li>
+			<li>Jim & Pam's 💕</li>
+			<li>Chandler & Monica's 🥺</li>
+			<li>SRK & Kajol's 💃🕺</li>
+			<li>SRK & Deepika's 🌟</li>
+			<li>And all the Burrito Buddies 🌯</li>
+		</ul>
+
+		<p>Will you be my...</p>
+		<h2 style="color: #e84393;">Permanent Snuggle Partner<br>Forever Foodie Date<br>& Lifetime Partner in
+			Dad Jokes? 😜</h2>
+
+		<div class="button-group" id="initialButtons">
+			<button id="yesBtn" onclick="handleYes()">H*ck Yes! 🎉</button>
+			<button id="noBtn" onmouseover="dodgeNo()" onclick="handleNo()">Umm... 🧐</button>
+		</div>
+
+		<div id="confirmYes" class="hidden">
+			<p class="burp">💨 (That's my excited burp!)</p>
+			<p>Wait... Are you <i>sure</i> sure? Like...</p>
+			<button onclick="handleSureCheck(1)">As sure as we love Modern Family reruns!</button>
+			<button onclick="handleSureCheck(2)">Milk and Mocha level sure! 🐻‍❄️❤️🐻</button>
+		</div>
+
+		<div id="finalMessage" class="hidden">
+			<h2>YAAASSS! 💃🕺</h2>
+			<div class="movie-quote">"I'm just a girl, standing in front of a boy... eating a shawarma." - Not
+				Actually Notting Hill</div>
+			<p>Our Valentine's Plan:</p>
+			<ol>
+				<li>1. SRK Movie Marathon 🎬</li>
+				<li>2. Unlimited Punjabi food and snacks 🌶️</li>
+				<li>3. Cuddle Kabaddi Session 🤼♂️</li>
+			</ol>
+			<div id="surprise" onclick="revealSecret()" style="cursor: pointer; color: #e84393;">Click for SRK
+				Style Surprise! 💖</div>
+		</div>
+
+		<div id="noResponses" class="hidden">
+			<p id="noMessage"></p>
+			<button onclick="handleGiveIn()">Okay Fine Yes! 🙄</button>
+			<button onclick="handleHunger()">I'm Hangry! 🍔</button>
+		</div>
+	</div>
+
+	<img src="https://media1.tenor.com/m/3zEyn_loATEAAAAC/om-shanti-om-srk.gif" alt="SRK" id="srk-img"
+		 class="hidden">
+
+	<script>
+		let noCount = 0;
+		let sureChecks = 0;
+
+		function handleYes() {
+			document.getElementById('initialButtons').classList.add('hidden');
+			document.getElementById('confirmYes').classList.remove('hidden');
+		}
+
+		function handleSureCheck(level) {
+			sureChecks++;
+			const messages = [
+				"Even if I fart during cuddles? 💨",
+				"Even after 50 years of dad jokes? 😎",
+				"As your forever Pani Puri provider? 🌶️"
+			];
+
+			if (sureChecks >= 3) {
+				document.getElementById('confirmYes').classList.add('hidden');
+				document.getElementById('finalMessage').classList.remove('hidden');
+				document.getElementById('srk-img').classList.remove('hidden');
+			} else {
+				document.querySelector('#confirmYes p').innerHTML = messages[sureChecks - 1];
+			}
+		}
+
+		function dodgeNo() {
+			const noBtn = document.getElementById('noBtn');
+			noBtn.style.transform = `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`;
+		}
+
+		function handleNo() {
+			const messages = [
+				"Nice try! But naaahhh... 😜",
+				"Kya Jigglypuff, snack time pe glitch hogaya? 🍪",
+				"Hmm... Did your Marwari calculator malfunction? 🧮",
+				"Okay, Hunger Games activated! 🍔 ➡️",
+				"Shonaaaaa... don't make me do SRK pose! 🕴️"
+			];
+
+			document.getElementById('initialButtons').classList.add('hidden');
+			document.getElementById('noResponses').classList.remove('hidden');
+			document.getElementById('noMessage').innerHTML = messages[noCount % messages.length];
+			noCount++;
+		}
+
+		function handleGiveIn() {
+			document.getElementById('noResponses').classList.add('hidden');
+			document.getElementById('finalMessage').classList.remove('hidden');
+			document.getElementById('srk-img').classList.remove('hidden');
+		}
+
+		function handleHunger() {
+			document.getElementById('noMessage').innerHTML = "Emergency Provisions Activated! 🚨<br>Virtual Samosa ➡️ 🥠, Chai ☕,<br>and of course... <b>ME! 😘</b>";
+		}
+
+		function revealSecret() {
+			const surpriseDiv = document.getElementById('surprise');
+			surpriseDiv.innerHTML = "P.S. I'll love you in every universe.<br>But in this one, can I get that samosa? 🥟";
+			document.body.style.background = "#ffe6ee url('https://i.gifer.com/7QZg.gif')";
+		}
+	</script>
+</body>
+
+</html>
